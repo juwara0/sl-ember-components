@@ -3,7 +3,7 @@ import InputBased from '../mixins/sl-input-based';
 import TooltipEnabled from '../mixins/sl-tooltip-enabled';
 import layout from '../templates/components/sl-radio-group';
 import Namespace from '../mixins/sl-namespace';
-import slError from '../utils/slError';
+import ComponentError from '../utils/error';
 
 /**
  * @module
@@ -88,24 +88,9 @@ export default Ember.Component.extend( InputBased, TooltipEnabled, Namespace, {
             const name = this.get( 'name' );
 
             if ( Ember.isEmpty( name ) ) {
-                // const error = new Ember.Error(
-                //     'The name property must be set on the sl-radio-group component'
-                // );
-                // error.description = 'This is description text';
-                // error.fileName = 'sl-radio-group';
-                // error.lineNumber = 89;
-                // throw error;
-
-                // throw new Error(
-                //     'The name property must be set on the sl-radio-group component'
-                // );
-                slError(
-                    'The name property must be set on the sl-radio-group component',
-                    'This is description text',
-                    'sl-radio-group',
-                    89,
-                    2727
-                );
+                /*eslint-disable */
+                throw new ComponentError.radioGroup( 'The name property must be set' );
+                /*eslint-enable */
             }
 
             const value = this.get( 'value' );
